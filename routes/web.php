@@ -11,6 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::group(['middleware' => ['web'], 'prefix'=>'admin', 'namespace'=>'Admin'], function() {
+     /****************************************
+     * 1. 后台主页
+     * 2. 主页显示的欢迎页面
+     ****************************************/
+    Route::get('/index', 'IndexController@index');
+    Route::get('/welcome', 'IndexController@welcome')->name('admin.welcome');
+
+    // 商品分类模块，资源路由
+    Route::resource('category', "CategoryController");
+
 });
