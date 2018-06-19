@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Controllers\Repositories\CategoryRepository;
 
-class CategoryController extends Controller
+class CategoriesController extends Controller
 {
     protected $categoryRepository;
 

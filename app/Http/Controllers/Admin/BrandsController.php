@@ -8,7 +8,7 @@ use App\Models\Brand;
 use App\Http\Controllers\Repositories\BrandRepository;
 use App\Http\Requests\BrandRequest;
 
-class BrandController extends Controller
+class BrandsController extends Controller
 {
     protected $brandRepository;
 
@@ -27,7 +27,7 @@ class BrandController extends Controller
         // 获取所有的品牌
         $brands = $this->brandRepository->brands();
 
-        return view('admin.brand.index', compact('brands'));
+        return view('admin.brands.index', compact('brands'));
     }
 
     /**
@@ -37,7 +37,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brand.create');
+        return view('admin.brands.create');
     }
 
     /**
@@ -52,17 +52,6 @@ class BrandController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -70,7 +59,7 @@ class BrandController extends Controller
      */
     public function edit(BRand $brand)
     {
-        return view('admin.brand.edit', compact('brand'));
+        return view('admin.brands.edit', compact('brand'));
     }
 
     /**

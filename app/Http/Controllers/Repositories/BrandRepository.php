@@ -9,8 +9,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Validation\Rule;
 use App\Presenters\BrandPresenter;
 use Validator;
-use App\Http\Controllers\Traits\ImageTrait;
-use App\Http\Controllers\Traits\ApiTrait;
+use App\Models\Traits\ImageTrait;
 
 class BrandRepository
 {

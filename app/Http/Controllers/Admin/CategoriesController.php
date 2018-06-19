@@ -9,7 +9,7 @@ use App\Http\Requests\CategoryRequest;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Repositories\CategoryRepository;
 
-class CategoryController extends Controller
+class CategoriesController extends Controller
 {
     protected $categoryRepository;
 
@@ -26,7 +26,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->categoryLst();
-        return view('admin.category.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -39,7 +39,7 @@ class CategoryController extends Controller
         // 获取所有的分类（tree struct）
         $categories = $this->categoryRepository->categoryLst();
 
-        return view('admin.category.create', compact('categories'));
+        return view('admin.categories.create', compact('categories'));
     }
 
     /**
@@ -70,7 +70,7 @@ class CategoryController extends Controller
         if ($category->cat_id) {
             //修改的分类所属分类不能是自己以及自己的子分类
             $data = $this->categoryRepository->getAllowCategoryById($category->cat_id);
-            return view('admin.category.edit', compact('data', 'category'));
+            return view('admin.categories.edit', compact('data', 'category'));
         } else {
             return back()->with('error', '分类不存在！');
         }
@@ -91,7 +91,7 @@ class CategoryController extends Controller
 
         $result = $this->categoryRepository->update($request, $category);
         if ($result['status'] == 1) {
-            return redirect()->route('category.index')->with('success', '分类' . $request['cat_name'] . '修改成功');
+            return redirect()->route('categories.index')->with('success', '分类' . $request['cat_name'] . '修改成功');
         }
 
         return back()->withInput()->withErrors('分类' . $request['cat_name'] . '修改失败');

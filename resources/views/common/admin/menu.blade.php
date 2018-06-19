@@ -6,7 +6,7 @@
 				<ul>
 					<li><a data-href="{{ url('/admin/products') }}" data-title="商品列表" href="javascript:void(0)">商品列表</a></li>
 					<li><a data-href="{{ url('/admin/products/create') }}" data-title="添加新商品" href="javascript:void(0)">添加新商品</a></li>
-                    <li><a data-href="{{ route('category.index') }}" data-title="商品分类" href="javascript:void(0)">商品分类</a></li>
+                    <li><a data-href="{{ route('categories.index') }}" data-title="商品分类" href="javascript:void(0)">商品分类</a></li>
                     <li><a data-href="{{ route('brands.index') }}" data-title="商品品牌" href="javascript:void(0)">商品品牌</a></li>
 				</ul>
 			</dd>
