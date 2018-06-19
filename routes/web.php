@@ -26,4 +26,7 @@ Route::group(['middleware' => ['web'], 'prefix'=>'admin', 'namespace'=>'Admin'],
     // 商品分类模块，资源路由
     Route::resource('category', "CategoryController");
 
+    // 商品品牌模块，资源路由
+    Route::resource('brands', "BrandController");
+
 });
