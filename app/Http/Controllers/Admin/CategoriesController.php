@@ -53,9 +53,9 @@ class CategoriesController extends Controller
         $result = $this->categoryRepository->store($request);
 
         if ($result['status'] == 1) {
-            return back()->with('success', '分类' . $request['cat_name'] . '创建成功');
+            return back()->with('status', '分类 ' . $request['cat_name'] . ' 创建成功');
         } else  {
-            return back()->with('error', '分类' . $request['cat_name'] . '创建失败');
+            return back()->with('status', '分类 ' . $request['cat_name'] . ' 创建失败');
         }
     }
 
