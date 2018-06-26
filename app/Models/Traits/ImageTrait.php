@@ -31,6 +31,7 @@ trait ImageTrait
      * @param Request $request
      * @param string $type 上传图片的类型 属于:商品| 品牌| 分类| ..
      * @param string $path 上传的路径配置
+     * @param boolean $isSize 是否生成多尺寸的图片
      * @return array|bool
      */
     public function upload(Request $request, $fieldName = "product_image", $type = 'products')
@@ -43,7 +44,7 @@ trait ImageTrait
         // move file to public
         if ($link = $request->file($fieldName)->store($pathConfig, config('image.upload.disks'))) {
             // 上传成功后返回对应的图片路径
-            return $this->setMsg('文件上传成功')->setCode(0)->setData(['src' => $link])->toJson();
+            return $this->setMsg($pathConfig)->setCode(0)->setData(['src' => $link])->toJson();
         }
 
         return $this->setMsg('服务器出错，请稍后再试')->setCode(301)->toJson();

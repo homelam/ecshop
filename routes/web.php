@@ -29,4 +29,28 @@ Route::group(['middleware' => ['web'], 'prefix'=>'admin', 'namespace'=>'Admin'],
     // 商品品牌模块，资源路由
     Route::resource('brands', "BrandsController");
 
+    // 商品属性模块，资源路由
+    Route::resource('types', "TypesController");
+
+    // 商品类型对应属性列表
+    // Route::resource('attributes', 'AttributesController');
+    Route::get('attributes/{goods_type}', 'AttributesController@index')->name('attributes.goods_type.list');
+    Route::get('attributes/create/{goods_type}', 'AttributesController@create')->name('attributes.create');
+
+    Route::resource('attributes', 'AttributesController')->only(['store', 'destroy', 'edit', 'update']);
+
+    // 商品模块
+    Route::resource('products', 'ProductsController');
+
+
+    // 图片上传
+    Route::any('upload', 'CommonController@uploadImage');
+
+    // ajax 删除商品属性
+    Route::get('products/delAttr/{id}', 'ProductsController@ajaxDelAttr')->name('products.ajaxdelattr');
+
+    // 商品库存量
+    // Route::resource('inventories', 'InventoriesController');
+    Route::get('quantities/{goods_id}', 'InventoriesController@quantity')->name('products.inventories.create');
+    Route::post('quantities', 'InventoriesController@store')->name('products.inventories.store');
 });

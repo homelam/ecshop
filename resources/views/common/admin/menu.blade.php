@@ -4,10 +4,11 @@
 			<dt><i class="Hui-iconfont">&#xe620;</i> 商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="{{ url('/admin/products') }}" data-title="商品列表" href="javascript:void(0)">商品列表</a></li>
-					<li><a data-href="{{ url('/admin/products/create') }}" data-title="添加新商品" href="javascript:void(0)">添加新商品</a></li>
+					<li><a data-href="{{ route('products.index') }}" data-title="商品列表" href="javascript:void(0)">商品列表</a></li>
+					<li><a data-href="{{ route('products.create') }}" data-title="添加新商品" href="javascript:void(0)">添加新商品</a></li>
                     <li><a data-href="{{ route('categories.index') }}" data-title="商品分类" href="javascript:void(0)">商品分类</a></li>
                     <li><a data-href="{{ route('brands.index') }}" data-title="商品品牌" href="javascript:void(0)">商品品牌</a></li>
+                    <li><a data-href="{{ route('types.index') }}" data-title="商品属性" href="javascript:void(0)">商品类型</a></li>
 				</ul>
 			</dd>
 		</dl>
