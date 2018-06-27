@@ -15,7 +15,16 @@
 //     return view('welcome');
 // });
 
-Route::group(['middleware' => ['web'], 'prefix'=>'admin', 'namespace'=>'Admin'], function() {
+/****************************************
+ * 后台相关的路由
+ * 1. 用户登录界面
+ * 2. 用户登录
+ * 3. 注销登录
+ ****************************************/
+Route::get('/admin/login' ,'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
+Route::post('/admin/login', 'Admin\Auth\LoginController@login');
+Route::post('/admin/logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
+Route::group(['middleware' => ['admin.auth', 'admin.permission'], 'prefix'=>'admin', 'namespace'=>'Admin'], function() {
      /****************************************
      * 1. 后台主页
      * 2. 主页显示的欢迎页面
@@ -53,4 +62,13 @@ Route::group(['middleware' => ['web'], 'prefix'=>'admin', 'namespace'=>'Admin'],
     // Route::resource('inventories', 'InventoriesController');
     Route::get('quantities/{goods_id}', 'InventoriesController@quantity')->name('products.inventories.create');
     Route::post('quantities', 'InventoriesController@store')->name('products.inventories.store');
+
+        /****************************************
+     * 1. 用户后台的管理路由
+     * 2. 管理员后台的管理路由
+     * 3. 角色的后台管理路由
+     ****************************************/
+    // Route::resource('/users', 'UsersController', ['only' => ['index']]);
+    Route::resource('/admins', 'AdminsController');
+    Route::resource('/roles', 'RolesController');
 });
