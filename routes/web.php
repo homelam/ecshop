@@ -11,10 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 /****************************************
  * 后台相关的路由
  * 1. 用户登录界面
@@ -71,4 +67,12 @@ Route::group(['middleware' => ['admin.auth', 'admin.permission'], 'prefix'=>'adm
     // Route::resource('/users', 'UsersController', ['only' => ['index']]);
     Route::resource('/admins', 'AdminsController');
     Route::resource('/roles', 'RolesController');
+});
+
+/****************************************
+ * 主页相关的路由
+ ****************************************/
+Route::get('/', 'Home\HomeController@index');
+Route::prefix('home')->namespace('Home')->group(function () {
+    Route::get('/', 'HomeController@index');
 });

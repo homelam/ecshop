@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Intervention\Image\Facades\Image;
 use App\Models\Traits\ProductTrait;
+use App\Models\Category;
 
 class Product extends Model
 {
@@ -288,5 +289,60 @@ class Product extends Model
             ->get();
         // dd($gaData);
         return $gaData;
+    }
+
+    /**
+     * 获取正在促销的商品
+     * @param int $limit
+     * @return Illuminate\Support\Collection
+     */
+    public function getPromoteGoods($limit = 5, $sort = 'desc')
+    {
+        $now = time();
+
+        return DB::table('products')->select('goods_id', 'goods_name', 'shop_price', 'promote_price', 'mid_img')
+            ->where('is_on_sale', '=', 1)
+            ->where('promote_price', '>', 0)
+            ->where('promote_start_date', '<=', $now)
+            ->where('promote_end_date', '>=', $now)
+            ->orderBy('sort_order', $sort)
+            ->take($limit)
+            ->get();
+    }
+
+    /**
+     * 获取推荐类型的数据
+     * @param string $recType 推荐类型
+     * @param int $limit 获取的记录数
+     * @param string $sort 排序
+     * @return Illuminate\Support\Collection
+     */
+    public function getRecommendGoods(string $recType, $limit = 5, $sort = 'desc')
+    {
+        return DB::table('products')->select('goods_id', 'goods_name', 'shop_price', 'mid_img')
+            ->where([
+                'is_on_sale' => 1,
+                $recType => 1
+            ])
+            ->orderBy('sort_order', $sort)
+            ->take($limit)
+            ->get();
+    }
+
+    /**
+     * 通过分类获取该分类所有的商品
+     * @param int $cat_id 分类id
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function getGoodsIdByCatId($cat_id)
+    {
+        // 先取出所有子分类id
+        $childrenId = (new Category)->getChildren($cat_id);
+        $childrenId[] = $cat_id;
+
+        // 取出商品
+        $gids = $this->select('goods_id')->whereIn('cat_id', $childrenId)->get();
+
+        return $gids;
     }
 }

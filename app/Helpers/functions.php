@@ -119,3 +119,17 @@ if (!function_exists('deleteImage')) {
         }
     }
 }
+
+if (!function_exists('showImage')) {
+    function showImage($url, $width = '', $height = '')
+    {
+        $disk = config('image.upload.disks');
+        if($width)
+            $width = "width='$width'";
+        if($height)
+            $height = "height='$height'";
+
+        $path = $disk . '/' . $url;
+        echo "<img $width $height src='{$path}' />";
+    }
+}
